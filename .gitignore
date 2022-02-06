@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+/1.구구단/dist/
+/1.구구단/node_modules/
+/lecture/dist/
+/lecture/node_modules/
