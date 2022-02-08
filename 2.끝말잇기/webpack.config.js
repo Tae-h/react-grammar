@@ -1,5 +1,5 @@
 const path = require("path");
-const webpack = require("webpack");
+const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
     name: 'word-relay-config',
@@ -23,21 +23,35 @@ module.exports = {
                     ['@babel/preset-react', {
                         targets: {
                             browsers: ['> 1% in KR'] // browserslist
-                        }
+                        },
+                        debug: true,
                     }],
                     '@babel/preset-env'
                 ],
-                plugins: ['@babel/plugin-proposal-class-properties'],
+                plugins: [
+                    '@babel/plugin-proposal-class-properties',
+                    'react-refresh/babel',
+                ],
             }
         }]
     },
 
     plugins: [
-      new webpack.LoaderOptionsPlugin({debug: true}),
+       new RefreshWebpackPlugin(),
     ],
 
     output: { // 출력
-        path: path.join(__dirname, 'dist'), // __dirname: 현재폴더 경로
+        path: path.join(__dirname,  'dist'), // __dirname: 현재폴더 경로
         filename: 'app.js',
+        publicPath:  '/dist',
+    },
+    devServer: {
+        devMiddleware: {
+          publicPath:  '/dist'
+        },
+        static: {
+            directory: path.resolve(__dirname)
+        },
+        hot: true,
     }
 }
