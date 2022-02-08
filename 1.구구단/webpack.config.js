@@ -1,4 +1,6 @@
 const path = require("path");
+const webpack = require("webpack");
+
 module.exports = {
     name: 'word-relay-config',
     mode: 'development',
@@ -22,6 +24,10 @@ module.exports = {
             }
         }]
     },
+
+    plugins: [
+      new webpack.LoaderOptionsPlugin({debug: true}),
+    ],
 
     output: { // 출력
         path: path.join(__dirname, 'dist'), // __dirname: 현재폴더 경로
