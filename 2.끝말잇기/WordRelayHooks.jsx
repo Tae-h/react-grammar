@@ -1,4 +1,4 @@
-const React = require("react");
+const React = require("react"); // 노드의 모듈 시스템
 const { useState, useRef } = React;
 
 

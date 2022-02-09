@@ -1,4 +1,4 @@
-const Path = require("path");
+const path = require("path");
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
@@ -41,7 +41,7 @@ module.exports = {
     ],
 
     output: { // 출력
-        path: Path.join(__dirname,  'dist'), // __dirname: 현재폴더 경로
+        path: path.join(__dirname,  'dist'), // __dirname: 현재폴더 경로
         filename: 'app.js',
         publicPath:  '/dist',
     },
@@ -50,7 +50,7 @@ module.exports = {
           publicPath:  '/dist'
         },
         static: {
-            directory: Path.resolve(__dirname)
+            directory: path.resolve(__dirname)
         },
         hot: true,
     }
