@@ -1,7 +1,7 @@
 //const React = require("react");
 //const { Component } = React;
 
-import React from "react";
+import React, { memo } from "react";
 const { useState, useRef } = React;
 import BallTryHooks from "./BallTryHooks";
 // webpack 의 바벨이 알아서 require 로 바꿔주기 때문에 import 써도 상관 없음!
@@ -18,11 +18,12 @@ function getNumbers() {
     return array;
 }
 
-const NumberBaseballHooks = () =>  {
+const NumberBaseballHooks = memo( () =>  {
     const [result, setResult] = useState('');
     const [value, setValue] = useState('');
     const [answer, setAnswer] = useState( getNumbers );
     const [tries, setTries] = useState([]);
+    const inputEle = useRef(null);
 
 
 
@@ -76,6 +77,8 @@ const NumberBaseballHooks = () =>  {
 
             }
 
+            inputEle.current.focus();
+
         }
 
 
@@ -85,7 +88,10 @@ const NumberBaseballHooks = () =>  {
         <>
             <p> Hooks! NumberBaseBall!! </p>
             <h1>{ result }</h1>
-            <input maxLength={4} value={ value } onChange={ onChangeInput }/>
+            <input maxLength={4}
+                   value={ value }
+                   ref={inputEle}
+                   onChange={ onChangeInput }/>
             <button type="button"
                     onClick={ onClickInput }
             > 입력
@@ -105,7 +111,7 @@ const NumberBaseballHooks = () =>  {
             </ul>
         </>
     )
-}
+});
 
 export default NumberBaseballHooks;
 //module.exports = NumberBaseballHooks;

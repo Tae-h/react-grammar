@@ -1,16 +1,23 @@
- import React, { Component } from "react";
+ import React, { Component, PureComponent } from "react";
 
-class BallTry extends Component {
+class BallTry extends PureComponent {
     state = {
+        result: this.props.v.result,
+    }
 
+    onClickResult = () => {
+        this.setState({
+            result: '1'
+        })
     }
 
     render() {
+        const { v } = this.props;
         return (
             <>
                 <li>
-                    {this.props.v.try}
-                    <div> {this.props.v.result} </div>
+                    {v.try}
+                    <div onClick={this.onClickResult}> {this.state.result} </div>
                 </li>
             </>
         )

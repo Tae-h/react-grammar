@@ -1,7 +1,7 @@
 //const React = require("react");
 //const { Component } = React;
 
-import React, { Component } from "react";
+import React, { PureComponent, createRef } from "react";
 import BallTry from "./BallTry";
 // webpack 의 바벨이 알아서 require 로 바꿔주기 때문에 import 써도 상관 없음!
 
@@ -17,7 +17,7 @@ function getNumbers() {
     return array;
 }
 
-class NumberBaseball extends Component {
+class NumberBaseball extends PureComponent {
     /* 화살표 함수를 안쓰고 싶을때 constructor 함수 써줘야함 */
     /*constructor(props) {
         super(props);
@@ -60,6 +60,7 @@ class NumberBaseball extends Component {
                 tries: [...this.state.tries, {try: this.state.value, result: `홈런 ${this.state.value}`}],
                 value: '',
             })
+            this.inputEle.current.focus();
         } else {
             const valArr = this.state.value.split('').map((v) => parseInt(v));
 
@@ -69,15 +70,14 @@ class NumberBaseball extends Component {
             // 10번 틀리면
             if ( this.state.tries.length >= 9 ) {
                 this.setState({
-                    result: `10회 이상 틀렸습니다. 실패!!!! 답은: ${ answer.join() } 입니다!`,
+                    result: `10회 이상 틀렸습니다. 실패!!!! 답은: ${ this.state.answer.join() } 입니다!`,
                 })
                 alert('게임을 다시 시작 합니다!');
 
                 this.setState({
-                    answer: getNumbers(),
                     tries: [],
-                    result: '',
                     value: '',
+                    answer: getNumbers(),
                 })
             } else {
                 // 10번 이하로 틀렸을때!
@@ -94,17 +94,26 @@ class NumberBaseball extends Component {
                 })
 
             }
+            this.inputEle.current.focus();
 
         }
 
 
     }
 
+    inputEle = createRef();
+    /*onInputEle = (c) => {
+        this.inputEle = c;
+    }*/
     render() {
+        // 렌더 안에는 절대 setState 쓰면 안됨 why? setState 할때마다 렌더 함수 콜하기 때문 --> 무한 반복
         return (
             <>
                 <h1>{ this.state.result }</h1>
-                <input maxLength={4} value={ this.state.value } onChange={ this.onChangeInput }/>
+                <input maxLength={4}
+                       ref={this.inputEle}
+                       value={ this.state.value }
+                       onChange={ this.onChangeInput }/>
                 <button type="button"
                         onClick={this.onClickInput}
                 > 입력
