@@ -8,6 +8,7 @@ import BallTryHooks from "./BallTryHooks";
 
 // 이 function 이 다른데서도 쓰이고 this가 쓰일 필요 없을때 class 밖에다가
 function getNumbers() {
+    console.log('getNumbers');
     const candidate = [1,2,3,4,5,6,7,8,9];
     const array = [];
 

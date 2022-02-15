@@ -45,10 +45,19 @@ export default class ResponseCheck extends PureComponent {
             })
         }
     }
+    onReset = () => {
+        this.setState({
+            result: []
+        })
+    }
 
     renderAverage = () => {
         return this.state.result.length === 0 ?
-                null : <div>평균시간 {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
+                null :
+            <>
+                <div>추가! 평균시간 {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
+                <button onClick={this.onReset}>리셋!</button>
+            </>
     }
 
     /* render 안에서는 for, if 를 쓸수가 없 */
@@ -66,7 +75,7 @@ export default class ResponseCheck extends PureComponent {
                     null : <div>평균시간 {this.state.result.reduce((a, c) => a + c) / this.state.result.length}ms</div>
                 }
                 <div>
-                   평균 { this.renderAverage }
+                   { this.renderAverage() }
                 </div>
             </>
         )
