@@ -12,8 +12,12 @@ const ResponseCheckHooks = memo(() => {
      * @type {*|React.MutableRefObject<null>}
      */
     const timeout = useRef(null); //hooks 에서는 useRef 가 this 의 속성을 선언한다!!!!
-    const startTime = useRef(null);
-    const endTime = useRef(null);
+    const startTime = useRef(0);
+    const endTime = useRef(0);
+
+    /**
+     * useRef Hook 은 Dom 선택 용도 외에, 컴포넌트 안에서 조회 및 수정 가능한 변수를 관리하는 용도!!
+     */
 
     const onClickScreen = () => {
 
