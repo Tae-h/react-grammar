@@ -74,7 +74,6 @@ export default class RPS extends PureComponent {
         const comScore = scores[computerChoice(imgCoord)];
 
         const diff = myScore - comScore;
-        console.log(diff);
         if ( diff === 0 ) {
             this.setState({
                 result: '비김!'
