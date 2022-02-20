@@ -20,7 +20,7 @@ const BallHooks = memo(({ number }) => {
 
     return (
         <>
-            <div className="ballHooks" style={ background } >{number}</div>
+            <div className="ballHooks" style={{background}} >{number}</div>
         </>
     )
 
