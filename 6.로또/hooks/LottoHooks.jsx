@@ -46,6 +46,20 @@ const LottoHooks = memo(() => {
    }, [timeouts.current]) // <-- 빈 배열이면 componentDidMount 랑 같음
     // 배열에 요소가 들어 있으면 componentDidMount, componentDidUpdate 역할 둘다 수행
 
+    useEffect(() => {
+        console.log('winNumbers!!');
+    }, [winNumbers])
+
+    /*  Update 만 하고 싶을때!,  componentDidUpdate 에서만 하는 방법 꼼수!*/
+    const mounted = useRef(false);
+    useEffect(() => {
+        if ( ! mounted.current ) {
+            mounted.current = true;
+        } else {
+            // 비동기 요청
+        }
+
+    }, []); // componentDidUpdate O, componentDidMount X
 
     const runTimeouts = () => {
         for ( let i = 0; i < winNumbers.length - 1; i++ ) {
@@ -65,6 +79,7 @@ const LottoHooks = memo(() => {
         }, 7000)
     }
 
+    /* useCallback 은 함수 자체를 기억(캐시) */
     const onClickRedo = useCallback(() => {
         setWinNumbers(getWinNumbers());
         setWinBalls([]);
@@ -72,7 +87,7 @@ const LottoHooks = memo(() => {
         setRedo(false);
 
         timeouts.current = [];
-    }, []);
+    }, [winNumbers]);
 
     return (
         <>
@@ -83,7 +98,7 @@ const LottoHooks = memo(() => {
                 )}
             </div>
             <div>보너스</div>
-            {bonus && <BallHooks number={ bonus } />}
+            {bonus && <BallHooks number={ bonus } />}  {/* 자식 컴포넌트에 함수를 넘길 때는 반드시 useCallBack을 써야 함 */}
             {redo && <button onClick={ onClickRedo }>한 번 더</button>}
         </>
     )
