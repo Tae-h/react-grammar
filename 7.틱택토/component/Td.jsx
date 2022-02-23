@@ -10,12 +10,13 @@ const Td = ({cellData, cellIndex, rowIndex, dispatch}) => {
             return;
         }
 
+        // dispatch 비동기 CLICK_CELL 실행 중에 CHANGE_TURN 발생
         dispatch({ //
             type: CLICK_CELL,
             row: rowIndex,
             cell: cellIndex,
         });
-        dispatch({type: CHANGE_TURN});
+
     }, [cellData]); // cellData 가 바뀔 때만
 
 
