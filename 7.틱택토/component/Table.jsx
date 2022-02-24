@@ -1,6 +1,6 @@
-import React from "react";
+import React, {memo} from "react";
 import Tr from "./Tr";
-const Table = ({tableData, onClick, dispatch}) => {
+const Table = memo(({tableData, onClick, dispatch}) => {
     return (
         <>
             <table>
@@ -14,6 +14,6 @@ const Table = ({tableData, onClick, dispatch}) => {
             </table>
         </>
     )
-}
+})
 
 export default Table;

@@ -101,7 +101,6 @@ const TicTacToe = memo((callback, deps) => {
         if ( tableData[0][2] === turn && tableData[1][cell] === turn && tableData[2][0] === turn) {
             win = true;
         }
-        console.log(win);
         /* 순서 보장 해야함!! dispatch 비동기임 */
         if ( win ) {
             console.log('winner!! ', turn);
