@@ -2,7 +2,7 @@ const path = require("path");
 const RefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
-    name: 'find-mine-config',
+    name: 'mine-search-config',
     mode: 'development',
     devtool: 'eval',
     resolve: {
