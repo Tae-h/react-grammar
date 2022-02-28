@@ -48,6 +48,7 @@ const MineSearch = () => {
     const value = useMemo(() => ({tableData: state.tableData, dispatch}), [state.tableData]);
     return (
         <>
+            {/* contextApi 복습 해야함 */}
             <TableContext.Provider value={{ tableData: state.tableData, dispatch }}>
                 <Form />
                 <div>{ state.timer }</div>
