@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useContext } from "react";
-import { TableContext } from "../MineSearch";
+import {START_GAME, TableContext} from "../MineSearch";
 
 
 
@@ -23,7 +23,7 @@ const Form = () => {
         setMine(e.target.value);
     }, [mine]);
 
-    const onclickStart = useCallback(() => {
+    const onClickStart = useCallback(() => {
         dispatch({type: START_GAME, row, cell, mine});
     }, [row, cell, mine]);
 
@@ -33,7 +33,7 @@ const Form = () => {
                 <input type="number" placeholder="세로" value={ row } onChange={ onRowChange } />
                 <input type="number" placeholder="가로" value={ cell } onChange={ onCellChange } />
                 <input type="number" placeholder="지롸" value={ mine } onChange={ onMineChange } />
-                <button onClick={ onclickStart }>Start!</button>
+                <button onClick={ onClickStart }>Start!</button>
             </div>
         </>
     )
