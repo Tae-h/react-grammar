@@ -5,7 +5,6 @@ import {TableContext} from "../MineSearch";
 const Table = memo(() => {
 
     const { tableData } = useContext(TableContext);
-    console.log(tableData)
     return (
 
         <>

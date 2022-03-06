@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useContext} from "react";
+import React, {memo, useCallback, useContext, useMemo} from "react";
 import {CLICKED_MINE, CODE, FLAG_CELL, NORMALIZE_CELL, OPEN_CELL, QUESTION_CELL, TableContext} from "../MineSearch";
 
 const getTdStyle = (data) => {
@@ -34,6 +34,7 @@ const getTdStyle = (data) => {
 }
 
 const getTdText = (data) => {
+    console.log('render?');
     switch (data) {
         case CODE.NORMAL:
             return '';
@@ -61,6 +62,7 @@ const getTdText = (data) => {
 
 const Td = memo(({rowIndex, cellIndex}) => {
 
+    // useContext 를 쓰면 state 기 바뀔 때 마다 re rendering 된다
     const { tableData, dispatch, halted } = useContext(TableContext);
 
     const onClickTd = useCallback(() => {
@@ -120,14 +122,30 @@ const Td = memo(({rowIndex, cellIndex}) => {
 
     }, [tableData[rowIndex][cellIndex], halted]);
 
+    console.log('td');
+    /*return useMemo(() => (
+            <>
+                <td style={ getTdStyle( tableData[rowIndex][cellIndex] ) }
+                    onClick={ onClickTd }
+                    onContextMenu={ onRightClickTd }
+                >
+                    { getTdText( tableData[rowIndex][cellIndex] ) }
+                </td>
+            </>
+        ), [tableData[rowIndex][cellIndex]]);*/
+    return <RealTd onClickTd={onClickTd} onRightClickTd={onRightClickTd} data={tableData[rowIndex][cellIndex]}/>;
+});
 
+/* 최적화 방법중에 하나 */
+const RealTd = memo(({ onClickTd, onRightClickTd, data }) => {
+    console.log('Real Td!!!');
     return (
         <>
-            <td style={ getTdStyle( tableData[rowIndex][cellIndex] ) }
+            <td style={ getTdStyle( data ) }
                 onClick={ onClickTd }
                 onContextMenu={ onRightClickTd }
             >
-                { getTdText( tableData[rowIndex][cellIndex] ) }
+                { getTdText( data ) }
             </td>
         </>
     )
