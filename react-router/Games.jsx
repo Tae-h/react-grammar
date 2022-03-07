@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, HashRouter, Link, Route} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Link, Route, Switch} from 'react-router-dom';
 import NumberBaseball from '../3.숫자야구/NumberBaseball';
 import Lotto from '../6.로또/Lotto';
 import RPS from '../5.가위바위보/RPS';
@@ -19,7 +19,7 @@ const Games = () => {
                     <Link to="/game/index">게임매쳐</Link>
                 </div>
                 <div>
-                    <switch> {/* 일치하는것 한개만 라우트 */}
+                    <Switch> {/* 일치하는것 한개만 라우트 */}
                         {/*<Route path="/number-baseball" component={NumberBaseball}/>
                         <Route path="/rps" component={ RPS }/>
                         <Route path="/lotto-gen" component={ Lotto }/>*/}
@@ -28,7 +28,7 @@ const Games = () => {
                         <Route path="/game/number-baseball" render={(props) => <GameMatcher {...props}/>}/> {/* 동적 라우트 matcher */}
                         <Route exact path="/game/number-baseball" render={(props) => <GameMatcher {...props}/>}/> {/* 동적 라우트 matcher */}
                         {/* exact path 주소랑 정확히 일치하는 경우 렌더링 */}
-                    </switch>
+                    </Switch>
                 </div>
             </BrowserRouter>
 
